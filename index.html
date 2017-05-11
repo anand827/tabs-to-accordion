@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabs-accordion</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="main">
+      <ul class="tabs">
+        <li class="active" rel="tab1">Tab 1</li>
+        <li rel="tab2">Tab 2</li>
+        <li rel="tab3">Tab 3</li>
+        <li rel="tab4">Tab 4</li>
+       </ul>
+        <div class="tab_container">
+        <h3 class="d_active tab_drawer_heading" rel="tab1">Tab 1</h3>
+        <div id="tab1" class="tab_content">
+        <h2>Tab 1 content</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac metus augue.</p>
+        </div>
+        <!-- #tab1 -->
+        <h3 class="tab_drawer_heading" rel="tab2">Tab 2</h3>
+        <div id="tab2" class="tab_content">
+        <h2>Tab 2 content</h2>
+          <p>Nunc dui velit, scelerisque eu placerat volutpat, dapibus eu nisi. Vivamus eleifend vestibulum odio non vulputate.</p>
+        </div>
+        <!-- #tab2 -->
+        <h3 class="tab_drawer_heading" rel="tab3">Tab 3</h3>
+        <div id="tab3" class="tab_content">
+        <h2>Tab 3 content</h2>
+          <p>Nulla eleifend felis vitae velit tristique imperdiet. Etiam nec imperdiet elit. Pellentesque sem lorem, scelerisque sed facilisis sed, vestibulum sit amet eros.</p>
+        </div>
+        <!-- #tab3 -->
+        <h3 class="tab_drawer_heading" rel="tab4">Tab 4</h3>
+        <div id="tab4" class="tab_content">
+        <h2>Tab 4 content</h2>
+          <p>Integer ultrices lacus sit amet lorem viverra consequat. Vivamus lacinia interdum sapien non faucibus. Maecenas bibendum, lectus at ultrices viverra, elit magna egestas magna, a adipiscing mauris justo nec eros.</p>
+        </div>
+        <!-- #tab4 -->
+        </div>
+        <!-- .tab_container -->
+        </div>
+    </div>
+    <script src="jquery-3.0.0.min.js"></script>
+    <script type="text/javascript">
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    /* if in tab mode */
+    $("ul.tabs li").click(function() {
+
+      $(".tab_content").hide();
+      var activeTab = $(this).attr("rel");
+      $("#"+activeTab).fadeIn(400);
+
+      $("ul.tabs li").removeClass("active");
+      $(this).addClass("active");
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
+
+    });
+  	/* if in drawer mode */
+  	$(".tab_drawer_heading").click(function() {
+
+      $(".tab_content").slideUp(400);
+      var d_activeTab = $(this).attr("rel");
+      $("#"+d_activeTab).slideDown(400);
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+      $(this).addClass("d_active");
+
+	  $("ul.tabs li").removeClass("active");
+	  $("ul.tabs li[rel^='"+d_activeTab+"']").addClass("active");
+    });
+    $('ul.tabs li').last().addClass("tab_last");
+    </script>
+</body>
+</html>
